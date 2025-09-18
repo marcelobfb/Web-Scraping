@@ -1,4 +1,3 @@
-# analyzer.py (Usando o modelo base "neuralmind/bert-base-portuguese-cased")
 
 import sqlite3
 import torch
@@ -6,11 +5,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import traceback
 
 def analyze_sentiments():
-    """
-    Analisa os sentimentos usando o modelo de base 'neuralmind/bert-base-portuguese-cased'.
-    AVISO: A precisão para análise de sentimento será baixa, pois este modelo não é 
-    especializado nesta tarefa.
-    """
     try:
         print("Carregando modelo de base (BERTimbau do repositório Neuralmind)...")
         model_name = "neuralmind/bert-base-portuguese-cased"
@@ -38,7 +32,6 @@ def analyze_sentiments():
             
             predicted_class_id = logits.argmax().item()
             
-            # A lógica assume que a Classe 1 é Positiva. A precisão do modelo aqui é baixa.
             sentiment = 'POSITIVE' if predicted_class_id == 1 else 'NEGATIVE'
             
             probabilities = torch.nn.functional.softmax(logits, dim=-1)[0]
